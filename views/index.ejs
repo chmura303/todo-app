@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head') %>
+
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div id="main">
+      <form id="form" action="/todos" method="POST">
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Add your todo"
+          required
+        />
+        <input type="submit" id="btn-add" value="+" />
+      </form>
+
+      <h3>My todos:</h3>
+
+      <% if (todos.length > 0) { %> <% todos.forEach(todo => { %>
+
+      <a href="/todos/<%= todo._id %>">
+        <p><%= todo.title %></p>
+      </a>
+      <a class="delete" data-doc="<%= todo._id %>">delete</a>
+
+      <% }) %> <% } else { %>
+      <p>No todos to show</p>
+      <% } %>
+    </div>
+
+    <%- include('./partials/footer') %>
+
+    <script>
+      const trashcan = document.querySelector('a.delete');
+
+      trashcan.addEventListener('click', e => {
+        const endpoint = `/todos/${trashcan.dataset.doc}`;
+
+        fetch(endpoint, {
+          method: 'DELETE',
+        })
+          .then(response => response.json())
+          .then(data => (window.location.href = data.redirect))
+          .catch(err => console.log(err));
+      });
+    </script>
+  </body>
+</html>
