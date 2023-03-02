@@ -1,8 +1,8 @@
 :root {
   --clr-neutral: #fff;
   --clr-light: #e7ecef;
-  --clr-accent: #274c77;
-  --clr-dark: #2a272a;
+  --clr-medium: #6096ba;
+  --clr-dark: #274c77;
   --clr-add: #00a67f;
   --clr-delete: #ad1c46;
 
@@ -115,7 +115,7 @@ svg {
 body {
   margin: 0;
   color: var(--clr-neutral);
-  background: var(--clr-dark);
+  background: var(--clr-medium);
   font-family: var(--ff-primary);
   font-size: var(--fs-500);
 
@@ -215,7 +215,7 @@ body {
 }
 
 .main {
-  background: var(--clr-accent);
+  background: var(--clr-dark);
   border-radius: 5px;
   padding: 5px;
   display: grid;
@@ -235,7 +235,7 @@ body {
 }
 
 .main.error-page {
-  background: var(--clr-dark);
+  background: var(--clr-medium);
   font-weight: var(--fw-300);
 }
 
@@ -245,5 +245,5 @@ body {
 
 .error.number {
   font-size: var(--fs-900);
-  font-weight: var(--fw-800);
+  font-family: var(--ff-decorative);
 }
