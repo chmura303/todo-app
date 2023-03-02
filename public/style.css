@@ -1,5 +1,46 @@
-/* --- RESET --- */
-/* https://andy-bell.co.uk/a-modern-css-reset/ */
+:root {
+  --clr-neutral: #fff;
+  --clr-light: #e7ecef;
+  --clr-accent: #274c77;
+  --clr-dark: #2a272a;
+  --clr-add: #00a67f;
+  --clr-delete: #ad1c46;
+
+  --size-50: 0.25rem;
+  --size-100: 0.5rem;
+  --size-200: 0.75rem;
+  --size-300: 1rem;
+  --size-400: 1.5rem;
+  --size-500: 2rem;
+  --size-600: 3rem;
+  --size-700: 4rem;
+  --size-800: 5rem;
+  --size-900: 6rem;
+
+  --ff-primary: 'Roboto', sans-serif;
+  --ff-decorative: 'Climate Crisis', cursive;
+
+  --fw-300: 300;
+  --fw-400: 400;
+  --fw-500: 500;
+  --fw-700: 700;
+  --fw-800: 800;
+
+  --fs-300: 300;
+  --fs-400: 1.125rem;
+  --fs-500: 1.25rem;
+  --fs-600: 1.5rem;
+  --fs-700: 1.75rem;
+  --fs-800: 2.15rem;
+  --fs-900: 3.5rem;
+}
+
+/* ----------------------------- */
+/* || Reset                      */
+/* ----------------------------- */
+
+/* https://piccalil.li/blog/a-modern-css-reset/ */
+
 /* Box sizing rules */
 *,
 *::before,
@@ -8,22 +49,17 @@
 }
 
 /* Remove default margin */
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
+* {
   margin: 0;
+  padding: 0;
+  font: inherit;
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role='list'],
-ol[role='list'] {
+ol[role='list'],
+ul,
+ol {
   list-style: none;
 }
 
@@ -32,9 +68,13 @@ html:focus-within {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 /* Set core body defaults */
 body {
-  min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
@@ -46,17 +86,10 @@ a:not([class]) {
 
 /* Make images easier to work with */
 img,
-picture {
+picture,
+svg {
   max-width: 100%;
   display: block;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
@@ -75,19 +108,142 @@ select {
   }
 }
 
-/* styling */
+/* ----------------------------- */
+/* || General styling        */
+/* ----------------------------- */
 
 body {
-  background: #c5d5cb;
+  margin: 0;
+  color: var(--clr-neutral);
+  background: var(--clr-dark);
+  font-family: var(--ff-primary);
+  font-size: var(--fs-500);
+
+  display: grid;
+  grid:
+    '...... header ......' auto
+    '......  main  ......' auto
+    '...... footer ......' auto /
+    1fr minmax(250px, 500px) 1fr;
 }
 
-.delete {
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 2px;
-  background: #dc143c;
+.nav {
+  grid-area: header;
+  font-family: var(--ff-decorative);
+  display: flex;
+  justify-content: center;
+  align-items: end;
 }
-.delete:hover {
-  background: #fc3d63;
+
+.main {
+  grid-area: main;
+  margin: auto;
+}
+
+.footer {
+  grid-area: footer;
+  margin: auto;
+}
+
+/* --- */
+.nav-title {
+  font-size: var(--fs-800);
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn.add {
+  width: 36.2px;
+  height: 36.2px;
+  border-radius: 50%;
+  border: 2px solid var(--clr-add);
+  background: var(--clr-neutral);
+  color: var(--clr-add);
+  font-weight: var(--fw-800);
+}
+
+.btn.add:hover {
+  background: var(--clr-add);
+  color: var(--clr-neutral);
+  transition: ease-in-out 0.2s;
+}
+
+.btn.add:focus {
+  background: var(--clr-light);
+  color: var(--clr-add);
+}
+
+#form {
+  display: flex;
+  gap: var(--size-50);
+}
+
+/* --- */
+
+.stuff-to-do {
+  font-family: var(--ff-decorative);
+  text-transform: lowercase;
+  padding-top: var(--size-400);
+  padding-bottom: var(--size-100);
+}
+
+.todo-container {
+  display: grid;
+  grid-template-columns: minmax(100px, auto) auto;
+  background: var(--clr-light);
+  color: var(--clr-dark);
+  padding: 0 var(--size-100);
+  border-radius: 5px;
+}
+
+.todo-title {
+  display: list-item;
+  list-style-type: circle;
+  list-style-position: inside;
+}
+
+.btn.delete {
+  text-align: end;
+  opacity: 0.6;
+}
+
+.btn.delete:hover {
+  color: var(--clr-delete);
+  opacity: 1;
+}
+
+.main {
+  background: var(--clr-accent);
+  border-radius: 5px;
+  padding: 5px;
+  display: grid;
+}
+
+.todo-img {
+  filter: invert(100%);
+  place-self: center;
+}
+
+#title {
+  background: transparent;
+  border: 0;
+  color: var(--clr-light);
+  border-bottom: 1px solid var(--clr-light);
+  outline: none;
+}
+
+.main.error-page {
+  background: var(--clr-dark);
+  font-weight: var(--fw-300);
+}
+
+.error {
+  place-self: center;
+}
+
+.error.number {
+  font-size: var(--fs-900);
+  font-weight: var(--fw-800);
 }

@@ -5,46 +5,57 @@
   <body>
     <%- include('./partials/nav') %>
 
-    <div id="main">
-      <form id="form" action="/todos" method="POST">
+    <div class="main">
+      <img class="todo-img" src="/to-do-list.png" alt="" />
+      <form action="/todos" id="form" method="POST">
         <input
           type="text"
           id="title"
           name="title"
-          placeholder="Add your todo"
+          placeholder="Add a new todo"
+          alt="add"
           required
         />
-        <input type="submit" id="btn-add" value="+" />
+        <input
+          type="submit"
+          class="btn add"
+          value="&#65291;"
+          alt="add button"
+        />
       </form>
 
-      <h3>My todos:</h3>
+      <h3 class="stuff-to-do">Stuff to do &#11183;</h3>
 
-      <% if (todos.length > 0) { %> <% todos.forEach(todo => { %>
-
-      <a href="/todos/<%= todo._id %>">
-        <p><%= todo.title %></p>
-      </a>
-      <a class="delete" data-doc="<%= todo._id %>">delete</a>
-
-      <% }) %> <% } else { %>
-      <p>No todos to show</p>
-      <% } %>
+      <div class="todo-container">
+        <% if (todos.length > 0) { %> <% todos.forEach(todo => { %>
+        <h3 href="/todos/<%= todo._id %>">
+          <p class="todo-title"><%= todo.title %></p>
+        </h3>
+        <a class="btn delete" data-doc="<%= todo._id %>" alt="delete icon"
+          >&#128465;</a
+        >
+        <% }) %> <% } else { %>
+        <p>No todos to show</p>
+        <% } %>
+      </div>
     </div>
 
     <%- include('./partials/footer') %>
 
     <script>
-      const trashcan = document.querySelector('a.delete');
+      const trashcans = document.querySelectorAll('.btn.delete');
 
-      trashcan.addEventListener('click', e => {
-        const endpoint = `/todos/${trashcan.dataset.doc}`;
+      trashcans.forEach(trashcan => {
+        trashcan.addEventListener('click', e => {
+          const endpoint = `/todos/${trashcan.dataset.doc}`;
 
-        fetch(endpoint, {
-          method: 'DELETE',
-        })
-          .then(response => response.json())
-          .then(data => (window.location.href = data.redirect))
-          .catch(err => console.log(err));
+          fetch(endpoint, {
+            method: 'DELETE',
+          })
+            .then(response => response.json())
+            .then(data => (window.location.href = data.redirect))
+            .catch(err => console.log(err));
+        });
       });
     </script>
   </body>
