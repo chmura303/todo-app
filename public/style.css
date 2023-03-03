@@ -109,11 +109,10 @@ svg {
 }
 
 /* ----------------------------- */
-/* || General styling        */
+/* || General styling            */
 /* ----------------------------- */
 
 body {
-  margin: 0;
   color: var(--clr-neutral);
   background: var(--clr-medium);
   font-family: var(--ff-primary);
@@ -121,34 +120,78 @@ body {
 
   display: grid;
   grid:
-    '...... header ......' auto
-    '......  main  ......' auto
-    '...... footer ......' auto /
-    1fr minmax(250px, 500px) 1fr;
+    '...... header ......'
+    '......  main  ......'
+    '...... footer ......' /
+    1fr minmax(250px, 400px) 1fr;
 }
+
+/* ---------- header ----------- */
 
 .nav {
   grid-area: header;
   font-family: var(--ff-decorative);
-  display: flex;
-  justify-content: center;
-  align-items: end;
+  place-self: end center;
 }
 
-.main {
-  grid-area: main;
-  margin: auto;
-}
-
-.footer {
-  grid-area: footer;
-  margin: auto;
-}
-
-/* --- */
 .nav-title {
   font-size: var(--fs-800);
 }
+
+/* ----------- main ------------ */
+
+.main {
+  grid-area: main;
+  place-self: center;
+  background: var(--clr-dark);
+  border-radius: 5px;
+  padding: 5px;
+  display: grid;
+}
+
+.todo-img {
+  filter: invert(100%);
+  place-self: center;
+}
+
+#title {
+  background: transparent;
+  border: 0;
+  color: var(--clr-light);
+  border-bottom: 1px solid var(--clr-light);
+  outline: none;
+}
+
+.todo-container {
+  display: grid;
+  grid-template-columns: minmax(100px, auto) auto;
+  background: var(--clr-light);
+  color: var(--clr-dark);
+  padding: 0 var(--size-100);
+  border-radius: 5px;
+}
+
+.todo-title {
+  display: list-item;
+  list-style-type: circle;
+  list-style-position: inside;
+}
+
+.stuff-to-do {
+  font-family: var(--ff-decorative);
+  text-transform: lowercase;
+  padding-top: var(--size-400);
+  padding-bottom: var(--size-100);
+}
+
+/* ---------- footer ----------- */
+
+.footer {
+  grid-area: footer;
+  place-self: center;
+}
+
+/* ---------- buttons ---------- */
 
 .btn {
   cursor: pointer;
@@ -175,35 +218,6 @@ body {
   color: var(--clr-add);
 }
 
-#form {
-  display: flex;
-  gap: var(--size-50);
-}
-
-/* --- */
-
-.stuff-to-do {
-  font-family: var(--ff-decorative);
-  text-transform: lowercase;
-  padding-top: var(--size-400);
-  padding-bottom: var(--size-100);
-}
-
-.todo-container {
-  display: grid;
-  grid-template-columns: minmax(100px, auto) auto;
-  background: var(--clr-light);
-  color: var(--clr-dark);
-  padding: 0 var(--size-100);
-  border-radius: 5px;
-}
-
-.todo-title {
-  display: list-item;
-  list-style-type: circle;
-  list-style-position: inside;
-}
-
 .btn.delete {
   text-align: end;
   opacity: 0.6;
@@ -214,25 +228,7 @@ body {
   opacity: 1;
 }
 
-.main {
-  background: var(--clr-dark);
-  border-radius: 5px;
-  padding: 5px;
-  display: grid;
-}
-
-.todo-img {
-  filter: invert(100%);
-  place-self: center;
-}
-
-#title {
-  background: transparent;
-  border: 0;
-  color: var(--clr-light);
-  border-bottom: 1px solid var(--clr-light);
-  outline: none;
-}
+/* ------ 404 error page ------- */
 
 .main.error-page {
   background: var(--clr-medium);
